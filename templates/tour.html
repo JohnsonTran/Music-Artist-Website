@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/stylesheets/tour.css') }}"> 
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 id="title">Upcoming Tour Dates</h1>
+    {% for event in data %}
+        <div class="row">
+            <div class="col-12 col-md-8 text-md-left text-center">
+                <div class="event-date">{{ event.date.strftime('%B %d, %Y') }}</div>
+                <div class="event-location">{{ event.location }}</div>
+                <div class="event-venue">{{ event.venue }}</div>
+            </div>
+            <div class="col-12 col-md-4 align-self-center text-md-right text-center">
+                <div class="ticket">
+                    <button class="btn btn-success">Tickets</button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

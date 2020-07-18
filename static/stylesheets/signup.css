@@ -1,0 +1,21 @@
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+.text-box {
+    background-color: transparent;
+    color: white;
+    outline: none;
+    border: 0;
+    border-bottom: solid #eeeeee 1px;
+}
+
+/* retains background style with autofil */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff !important;
+}
