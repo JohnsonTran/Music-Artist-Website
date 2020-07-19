@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <img src="{{ url_for('static', filename=product.filename) }}" class="card-img-top" alt="...">
+            <img src="{{ url_for('static', filename='images/'+product.filename) }}" class="card-img-top" alt="...">
         </div>
         <div class="col-6">
             <h4>{{ product.name }}</h4>

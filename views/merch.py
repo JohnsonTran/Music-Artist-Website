@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template
 from ..models.merch_model import Merch
 
-merch_blueprint = Blueprint("merch_blueprint", __name__, static_folder="static", template_folder="templates")
+merch_bp = Blueprint("merch_bp", __name__, static_folder="static", template_folder="templates")
 
-@merch_blueprint.route("/merch")
+@merch_bp.route("/merch")
 def merch_page():
     data = Merch.query.all()
     dict = categorize(data)

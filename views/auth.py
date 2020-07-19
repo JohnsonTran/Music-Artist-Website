@@ -5,15 +5,15 @@ from ..models.user import User
 from ..app import db
 from .forms import LoginForm, RegisterForm
 
-auth = Blueprint('auth', __name__)
+auth_bp = Blueprint('auth_bp', __name__)
 
-@auth.route('/login')
+@auth_bp.route('/login')
 def login():
     form = LoginForm(request.form)
     return render_template('login.html', form=form)
 
 # verifies user login information 
-@auth.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST'])
 def login_post():
     form = LoginForm(request.form)
     email = form.email.data
@@ -24,19 +24,19 @@ def login_post():
 
     if not user or not check_password_hash(user.password, password):
         flash('Please check your login details and try again.')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth_bp.login'))
 
     login_user(user, remember=remember)
 
-    return redirect(url_for('profile.profile_page'))
+    return redirect(url_for('profile_bp.profile_page'))
 
-@auth.route('/signup')
+@auth_bp.route('/signup')
 def signup():
     form = RegisterForm(request.form)
     return render_template('signup.html', form=form)
 
 # registers the new user into the database
-@auth.route('/signup', methods=['POST'])
+@auth_bp.route('/signup', methods=['POST'])
 def signup_post():
     form = RegisterForm(request.form)
     email = form.email.data
@@ -47,17 +47,17 @@ def signup_post():
     
     if user:
         flash('Email address already exists.')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth_bp.login'))
     
     new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
 
     db.session.add(new_user)
     db.session.commit()
 
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('auth_bp.login'))
 
-@auth.route('/logout')
+@auth_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('home.home_page'))
+    return redirect(url_for('home_bp.home_page'))

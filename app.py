@@ -16,7 +16,7 @@ def create_app():
     db.init_app(app)
 
     login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
+    login_manager.login_view = 'auth_bp.login'
     login_manager.init_app(app)
 
     # creates the database models
@@ -30,26 +30,26 @@ def create_app():
         return User.query.get(int(user_id))
 
     # registers blueprints
-    from .views.home import home
-    app.register_blueprint(home)
+    from .views.home import home_bp
+    app.register_blueprint(home_bp)
     
-    from .views.music import music
-    app.register_blueprint(music)
+    from .views.music import music_bp
+    app.register_blueprint(music_bp)
 
-    from .views.auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+    from .views.auth import auth_bp
+    app.register_blueprint(auth_bp)
 
-    from .views.profile import profile as profile_blueprint
-    app.register_blueprint(profile_blueprint)
+    from .views.profile import profile_bp
+    app.register_blueprint(profile_bp)
 
-    from .views.tour import tour_blueprint
-    app.register_blueprint(tour_blueprint)
+    from .views.tour import tour_bp
+    app.register_blueprint(tour_bp)
 
-    from .views.merch import merch_blueprint
-    app.register_blueprint(merch_blueprint)
+    from .views.merch import merch_bp
+    app.register_blueprint(merch_bp)
 
-    from .views.product import product_blueprint
-    app.register_blueprint(product_blueprint)
+    from .views.product import product_bp
+    app.register_blueprint(product_bp)
     
     from .views.admin import admin
     admin.init_app(app)
